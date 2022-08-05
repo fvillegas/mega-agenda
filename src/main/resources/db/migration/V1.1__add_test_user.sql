@@ -1,1 +1,1 @@
-INSERT INTO "users"(username) VALUES ('pepe');
+INSERT INTO users(username) VALUES ('pepe');
