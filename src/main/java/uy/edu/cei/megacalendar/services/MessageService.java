@@ -3,7 +3,7 @@ package uy.edu.cei.megacalendar.services;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import uy.edu.cei.megacalendar.mappers.UserMapper;
-import uy.edu.cei.megacalendar.models.User;
+import uy.edu.cei.megacalendar.models.UserModel;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class MessageService {
 
     public String generateWelcomeMessage() {
 
-        List<User> users = userMapper.fetchAll();
+        List<UserModel> userModels = userMapper.fetchAll();
 
         return "Hello from spring!!!";
     }
