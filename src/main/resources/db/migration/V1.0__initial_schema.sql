@@ -1,4 +1,4 @@
-CREATE TABLE userModels
+CREATE TABLE users
 (
     id       BIGINT NOT NULL,
     UUID     uuid UNIQUE,
@@ -6,7 +6,7 @@ CREATE TABLE userModels
     password TEXT
 );
 
-ALTER TABLE userModels
+ALTER TABLE users
     ADD PRIMARY KEY (id);
 
 CREATE SEQUENCE user_seq;

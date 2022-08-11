@@ -13,6 +13,6 @@ public interface UserMapper {
     @Select("SELECT * FROM users")
     public List<UserModel> fetchAll();
 
-    @Select("SELECT * FROM users WHERE username = {username}")
+    @Select("SELECT * FROM users WHERE username = #{username}")
     public Optional<UserModel> findByUsername(@Param("username") final String username);
 }
