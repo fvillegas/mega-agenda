@@ -9,6 +9,7 @@ import lombok.*;
 @Setter
 @Builder
 public class UserModel {
+    @JsonIgnore
     private Long id;
     private String username;
     @JsonIgnore

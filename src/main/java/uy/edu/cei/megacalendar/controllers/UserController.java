@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 import uy.edu.cei.megacalendar.controllers.request.UserCreateRequest;
+import uy.edu.cei.megacalendar.controllers.response.UserResponse;
 import uy.edu.cei.megacalendar.models.UserModel;
 import uy.edu.cei.megacalendar.services.UserService;
 
@@ -14,8 +15,11 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/user/{id}")
-    public UserModel index(@PathVariable("id") final Long id) {
-        return userService.fetchUserById(id);
+    public UserResponse index(@PathVariable("id") final Long id) {
+        UserModel userModel = userService.fetchUserById(id);
+        return UserResponse.builder()
+                .username(userModel.getUsername())
+                .build();
     }
 
     @PostMapping("/user")
