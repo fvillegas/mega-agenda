@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import uy.edu.cei.megacalendar.controllers.request.UserCreateRequest;
+import uy.edu.cei.megacalendar.controllers.response.UserResponse;
+import uy.edu.cei.megacalendar.exceptions.InvalidPasswordFormatException;
 import uy.edu.cei.megacalendar.mappers.UserMapper;
 import uy.edu.cei.megacalendar.models.UserModel;
 
@@ -35,11 +37,16 @@ public class UserService implements UserDetailsService {
                 ));
     }
 
-    public boolean createUser(UserCreateRequest userCreateRequest) {
+    public boolean createUser(UserCreateRequest userCreateRequest) throws InvalidPasswordFormatException {
         UserModel userModel = UserModel.builder()
                 .username(userCreateRequest.getUsername())
                 .password(passwordEncoder.encode(userCreateRequest.getPassword()))
                 .build();
+
+        int passwordLength = userModel.getPassword().length();
+        if (passwordLength < 8 || passwordLength > 70) {
+            throw new InvalidPasswordFormatException();
+        }
 
         boolean success = this.userMapper.insertUser(userModel);
         return success;
@@ -89,5 +96,9 @@ public class UserService implements UserDetailsService {
                 return true;
             }
         };
+    }
+
+    public List<UserResponse> fetchAll(final Integer limit) {
+        return Collections.emptyList();
     }
 }

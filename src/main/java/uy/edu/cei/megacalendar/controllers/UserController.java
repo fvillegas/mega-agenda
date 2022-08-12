@@ -5,8 +5,11 @@ import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 import uy.edu.cei.megacalendar.controllers.request.UserCreateRequest;
 import uy.edu.cei.megacalendar.controllers.response.UserResponse;
+import uy.edu.cei.megacalendar.exceptions.InvalidPasswordFormatException;
 import uy.edu.cei.megacalendar.models.UserModel;
 import uy.edu.cei.megacalendar.services.UserService;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -22,8 +25,13 @@ public class UserController {
                 .build();
     }
 
+    @GetMapping("/user/all")
+    public List<UserResponse> list(@RequestParam(value = "limit", required = false) final Integer limit) {
+        return userService.fetchAll(limit);
+    }
+
     @PostMapping("/user")
-    public HttpEntity<?> create(@RequestBody UserCreateRequest userCreateRequest) {
+    public HttpEntity<?> create(@RequestBody UserCreateRequest userCreateRequest) throws InvalidPasswordFormatException {
         boolean success = userService.createUser(userCreateRequest);
         return HttpEntity.EMPTY;
     }
