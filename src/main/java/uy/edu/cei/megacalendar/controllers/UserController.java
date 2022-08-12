@@ -13,7 +13,7 @@ public class UserController {
 
     private UserService userService;
 
-    @GetMapping("/user/#{id}")
+    @GetMapping("/user/{id}")
     public UserModel index(@PathVariable("id") final Long id) {
         return userService.fetchUserById(id);
     }
