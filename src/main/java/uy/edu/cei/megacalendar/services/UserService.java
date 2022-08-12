@@ -6,7 +6,9 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import uy.edu.cei.megacalendar.controllers.request.UserCreateRequest;
 import uy.edu.cei.megacalendar.mappers.UserMapper;
 import uy.edu.cei.megacalendar.models.UserModel;
 
@@ -22,6 +24,7 @@ import static java.lang.String.format;
 public class UserService implements UserDetailsService {
 
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -30,6 +33,16 @@ public class UserService implements UserDetailsService {
                 user.orElseThrow(
                         () -> new UsernameNotFoundException(format("username %s not found", username))
                 ));
+    }
+
+    public boolean createUser(UserCreateRequest userCreateRequest) {
+        UserModel userModel = UserModel.builder()
+                .username(userCreateRequest.getUsername())
+                .password(passwordEncoder.encode(userCreateRequest.getPassword()))
+                .build();
+
+        boolean success = this.userMapper.insertUser(userModel);
+        return success;
     }
 
     private UserDetails mapToUserDetails(UserModel userModel) {

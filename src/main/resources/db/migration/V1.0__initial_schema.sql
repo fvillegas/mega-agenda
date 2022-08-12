@@ -2,7 +2,7 @@ CREATE TABLE users
 (
     id       BIGINT NOT NULL,
     UUID     uuid UNIQUE,
-    username TEXT,
+    username TEXT UNIQUE,
     password TEXT
 );
 

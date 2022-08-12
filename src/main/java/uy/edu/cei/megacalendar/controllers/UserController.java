@@ -1,22 +1,23 @@
 package uy.edu.cei.megacalendar.controllers;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uy.edu.cei.megacalendar.controllers.request.UserCreateRequest;
-import uy.edu.cei.megacalendar.mappers.UserMapper;
 import uy.edu.cei.megacalendar.models.UserModel;
+import uy.edu.cei.megacalendar.services.UserService;
 
 @AllArgsConstructor
 @RestController
 public class UserController {
 
-    private final UserMapper userMapper;
+    private UserService userService;
 
     @PostMapping("/user")
-    public void create(@RequestBody UserCreateRequest userCreateRequest) {
-        System.out.println(userCreateRequest);
+    public HttpEntity<?> create(@RequestBody UserCreateRequest userCreateRequest) {
+        boolean success = userService.createUser(userCreateRequest);
+        return HttpEntity.EMPTY;
     }
 }
