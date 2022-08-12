@@ -45,7 +45,11 @@ public class UserService implements UserDetailsService {
         return success;
     }
 
-    private UserDetails mapToUserDetails(UserModel userModel) {
+    public UserModel fetchUserById(final Long id) {
+        return userMapper.fetchUserById(id);
+    }
+
+    private UserDetails mapToUserDetails(final UserModel userModel) {
         return new UserDetails() {
             private static final List<GrantedAuthority> ROLE_USER = Collections
                     .unmodifiableList(AuthorityUtils.createAuthorityList("ROLE_USER"));

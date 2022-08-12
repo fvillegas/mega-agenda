@@ -14,6 +14,9 @@ public interface UserMapper {
     @Select("SELECT * FROM users WHERE username = #{username}")
     public Optional<UserModel> findByUsername(@Param("username") final String username);
 
+    @Select("SELECT * FROM users WHERE id = #{id}")
+    public UserModel fetchUserById(Long id);
+
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     @SelectKey(statement = "SELECT nextval('user_seq')", keyProperty = "id", before = true, resultType = long.class)
     @Insert("INSERT INTO users(id, username, password) VALUES(#{id}, #{username}, #{password})")
