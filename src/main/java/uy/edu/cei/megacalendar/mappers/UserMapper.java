@@ -19,6 +19,6 @@ public interface UserMapper {
 
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     @SelectKey(statement = "SELECT nextval('user_seq')", keyProperty = "id", before = true, resultType = long.class)
-    @Insert("INSERT INTO users(id, username, password) VALUES(#{id}, #{username}, #{password})")
+    @Insert("INSERT INTO users(id, username, password, created_at) VALUES(#{id}, #{username}, #{password}, 'now')")
     public boolean insertUser(UserModel userModel);
 }

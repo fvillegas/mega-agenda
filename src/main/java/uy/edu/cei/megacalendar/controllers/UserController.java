@@ -8,8 +8,11 @@ import uy.edu.cei.megacalendar.controllers.response.UserResponse;
 import uy.edu.cei.megacalendar.exceptions.InvalidPasswordFormatException;
 import uy.edu.cei.megacalendar.models.UserModel;
 import uy.edu.cei.megacalendar.services.UserService;
+import uy.edu.cei.megacalendar.utils.UserTimezoneTransformerUtil;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @RestController
@@ -27,7 +30,19 @@ public class UserController {
 
     @GetMapping("/user/all")
     public List<UserResponse> list(@RequestParam(value = "limit", required = false) final Integer limit) {
-        return userService.fetchAll(limit);
+        return userService.fetchAll(limit).stream()
+                .map(u -> UserResponse.builder()
+                        .username(u.getUsername())
+                        .createdAt(
+                                UserTimezoneTransformerUtil
+                                        .fromEventTimezoneToUserTimezone(
+                                                u.getUserTimezone(),
+                                                u.getCreatedAt()
+                                        )
+                        )
+                        .build()
+                )
+                .collect(Collectors.toList());
     }
 
     @PostMapping("/user")

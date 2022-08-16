@@ -56,6 +56,10 @@ public class UserService implements UserDetailsService {
         return userMapper.fetchUserById(id);
     }
 
+    public List<UserModel> fetchAll(final Integer limit) {
+        return this.userMapper.fetchAll();
+    }
+
     private UserDetails mapToUserDetails(final UserModel userModel) {
         return new UserDetails() {
             private static final List<GrantedAuthority> ROLE_USER = Collections
@@ -96,9 +100,5 @@ public class UserService implements UserDetailsService {
                 return true;
             }
         };
-    }
-
-    public List<UserResponse> fetchAll(final Integer limit) {
-        return Collections.emptyList();
     }
 }
