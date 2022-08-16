@@ -1,4 +1,4 @@
-SET timezone TO 'UTC';
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE users
 (

@@ -11,6 +11,13 @@
 ```
 CREATE USER mega-agenda WITH PASSWORD "top-secret-password";
 CREATE DATABASE mega-agenda WITH OWNER "mega-agenda";
+ALTER DATABASE mega-agenda SET timezone TO 'UTC';
+```
+
+For the specif database create extension
+
+```
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 ```
 
 ADD ENVIRONMENT VARIABLES

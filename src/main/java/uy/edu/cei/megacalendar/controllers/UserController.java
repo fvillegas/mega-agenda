@@ -30,9 +30,11 @@ public class UserController {
 
     @GetMapping("/user/all")
     public List<UserResponse> list(@RequestParam(value = "limit", required = false) final Integer limit) {
-        return userService.fetchAll(limit).stream()
+        List<UserModel> userModelList = userService.fetchAll(limit);
+        return userModelList.stream()
                 .map(u -> UserResponse.builder()
                         .username(u.getUsername())
+                        .uuid(u.getUuid())
                         .createdAt(
                                 UserTimezoneTransformerUtil
                                         .fromEventTimezoneToUserTimezone(

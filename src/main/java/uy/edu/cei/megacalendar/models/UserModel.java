@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 public class UserModel {
     @JsonIgnore
     private Long id;
+    private UUID uuid;
     private String username;
     @JsonIgnore
     private String password;
