@@ -31,3 +31,9 @@ Create certificates in PROJECT_DIRECTORY/src/main/resources/jwt:
 ```
 openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem
 ```
+
+# Documentation
+MyBatis: 
+- https://mybatis.org/mybatis-3/sqlmap-xml.html
+- https://medium.com/@hsvdahiya/mybatis-annotations-result-mapping-spring-79944ff74b84
+

@@ -1,4 +1,4 @@
-package uy.edu.cei.megacalendar.models;
+package uy.edu.cei.megacalendar.controllers.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class EventModel {
-    private Long id;
+public class EventResponse {
     private String name;
 }
