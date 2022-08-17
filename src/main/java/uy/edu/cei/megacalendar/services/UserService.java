@@ -12,6 +12,7 @@ import uy.edu.cei.megacalendar.controllers.request.UserCreateRequest;
 import uy.edu.cei.megacalendar.controllers.response.UserResponse;
 import uy.edu.cei.megacalendar.exceptions.InvalidPasswordFormatException;
 import uy.edu.cei.megacalendar.mappers.UserMapper;
+import uy.edu.cei.megacalendar.models.NoUserModel;
 import uy.edu.cei.megacalendar.models.UserModel;
 
 import java.util.Collection;
@@ -58,6 +59,10 @@ public class UserService implements UserDetailsService {
 
     public List<UserModel> fetchAll(final Integer limit) {
         return this.userMapper.fetchAll();
+    }
+
+    public NoUserModel fetchNoUser(final Long id) {
+        return this.userMapper.fetchAnotherNoUserModel(id);
     }
 
     private UserDetails mapToUserDetails(final UserModel userModel) {

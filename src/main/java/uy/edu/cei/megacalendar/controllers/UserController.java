@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import uy.edu.cei.megacalendar.controllers.request.UserCreateRequest;
 import uy.edu.cei.megacalendar.controllers.response.UserResponse;
 import uy.edu.cei.megacalendar.exceptions.InvalidPasswordFormatException;
+import uy.edu.cei.megacalendar.models.NoUserModel;
 import uy.edu.cei.megacalendar.models.UserModel;
 import uy.edu.cei.megacalendar.services.UserService;
 import uy.edu.cei.megacalendar.utils.UserTimezoneTransformerUtil;
@@ -45,6 +46,11 @@ public class UserController {
                         .build()
                 )
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/no-user/{id}")
+    public NoUserModel showNoUserModel(@PathVariable("id") final Long id) {
+        return this.userService.fetchNoUser(id);
     }
 
     @PostMapping("/user")
